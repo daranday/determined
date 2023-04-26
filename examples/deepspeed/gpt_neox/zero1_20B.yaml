@@ -1,4 +1,6 @@
-name: gpt-neox-zero1-2-7B
+name: gpt-neox-zero-20B
+workspace: GPT-NeoX
+project: 20B
 debug: false
 profiling:
     enabled: false
@@ -9,13 +11,13 @@ hyperparameters:
   search_world_size: false
   conf_dir: /gpt-neox/configs
   conf_file:
-      - 2-7B.yml
-      - docker_data.yml
+    - 20B_dai.yml
   overwrite_values:
-     pipe_parallel_size: 2
-     model_parallel_size: 2
-     train_batch_size: 512
-     train_micro_batch_size_per_gpu: 2
+    finetune: true
+    train_micro_batch_size_per_gpu: 1
+    pipe_parallel_size: 4
+    model_parallel_size: 2
+    log_interval: 2
   wandb_group: null
   wandb_team: null
   user_script: null
@@ -29,15 +31,16 @@ environment:
     image:
       gpu: determinedai/gpt-neox:4850e79
 resources:
-  slots_per_trial: 16
+  slots_per_trial: 96
+  resource_pool: compute-pool-a10
 searcher:
   name: single
   metric: lm_loss
   smaller_is_better: false
   max_length:
-    batches: 10000
+    batches: 100
 min_validation_period:
-    batches: 5000
+    batches: 50
 max_restarts: 0
 entrypoint:
   - python3
