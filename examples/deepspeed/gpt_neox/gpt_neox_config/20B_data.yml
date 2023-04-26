@@ -1,0 +1,11 @@
+# Data paths and options when using EleutherAI cluster
+{
+  #Tokenizer /  checkpoint settings - you will need to change these to the location you have them saved in
+  "vocab-file": "/run/determined/workdir/shared_fs/gpt_neox_data/20B_checkpoints/20B_tokenizer.json",
+  # NOTE: You can make additional directories to load and save checkpoints
+  "load": "/run/determined/workdir/shared_fs/gpt_neox_data/20B_checkpoints",
+  "save": "/run/determined/workdir/shared_fs/gpt_neox_data/20B_checkpoints",
+  # NOTE: This is the default dataset. Please change it to your dataset.
+  "data-path": "/run/determined/workdir/shared_fs/gpt_neox_data/enron/enron_text_document",
+  "log-dir": null,
+}
